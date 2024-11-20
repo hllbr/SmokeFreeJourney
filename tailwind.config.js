@@ -1,16 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // React dosyalarını dahil et
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        lightBg: "#f1f5f9",
-        darkBg: "#2b2b2b",
-        primary: "#6a994e",
-        secondary: "#a2d2ff",
-        danger: "#ff6f61",
+        lungClean: "#6dd47e", // Temizlenen alan rengi
+        lungDirty: "#ff6f61", // Kirli alan rengi
+        darkBg: "#1a202c",   // Arka plan rengi
       },
     },
   },

@@ -1,34 +1,22 @@
 import React from "react";
 
 const ProgressBar = ({ startDate }) => {
-  const healthStages = [
-    { time: 20, message: "Nabzınız normale döndü." },
-    { time: 480, message: "Kandaki nikotin seviyesi yarıya indi." },
-    { time: 10080, message: "Tat ve koku duyularınız iyileşti." },
-    { time: 525600, message: "Kalp hastalığı riskiniz %50 azaldı." },
-  ];
+  const minutesSinceQuit = startDate
+    ? Math.floor((new Date() - new Date(startDate)) / (1000 * 60))
+    : 0;
 
-  const minutesSinceQuit = Math.floor(
-    (new Date() - new Date(startDate)) / (1000 * 60)
-  );
-  const currentStage = healthStages.find(
-    (stage) => minutesSinceQuit < stage.time
-  ) || { message: "Sağlık gelişiminiz tamamlandı!" };
+  const progress = Math.min((minutesSinceQuit / 525600) * 100, 100).toFixed(2); // 1 yıl = 525,600 dakika
 
   return (
     <div className="mt-6">
-      <p>{currentStage.message}</p>
-      <div className="w-full bg-gray-300 rounded mt-2">
+      <p className="text-center text-white">İyileşme Süreci</p>
+      <div className="w-full bg-gray-300 rounded mt-2 h-6 relative overflow-hidden">
         <div
-          className="bg-secondary h-4 rounded"
-          style={{
-            width: `${Math.min(
-              (minutesSinceQuit / healthStages[healthStages.length - 1].time) * 100,
-              100
-            )}%`,
-          }}
+          className="bg-gradient-to-r from-green-400 to-blue-500 h-full animate-pulse"
+          style={{ width: `${progress}%` }}
         ></div>
       </div>
+      <p className="text-center mt-2 text-white">{progress}% tamamlandı</p>
     </div>
   );
 };
